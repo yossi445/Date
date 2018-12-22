@@ -42,13 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
 
+                String endDate  = dayOfMonth + "/" + (month + 1) +"/" + year;
+                tvCurrent.setText(endDate);
 
-                tvCurrent.setText(dayOfMonth + "/" + (month + 1) +"/" + year);
 
-                Calendar tar = Calendar.getInstance();
-                int tarYear = tar.get(Calendar.YEAR);
-                int tarMonth = tar.get(Calendar.MONTH);
-                int tarDay = tar.get(Calendar.DAY_OF_MONTH);
 
             }
         },currentYear,currentMonth,currentDay);
