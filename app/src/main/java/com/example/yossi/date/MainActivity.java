@@ -13,7 +13,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    TextView tvCurrent,tvTarget ;
+    TextView tvCurrent,tvTest;
     Button btn;
     DatePickerDialog datePickerDialog;
 
@@ -23,35 +23,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         tvCurrent = findViewById(R.id.tvCurrent);
-        tvTarget = findViewById(R.id.tvTarget);
-        btn = findViewById(R.id.btn);
+        tvTest = findViewById(R.id.tvTest);
+
+        btn= findViewById(R.id.btn);
         btn.setOnClickListener(this);
 
+
+        //Calendar currentDate = Calendar.getInstance();
+
+        /*int currentYear = currentDate.get(Calendar.YEAR);
+        int currentMonth= currentDate.get(Calendar.MONTH);
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
+        String currentDateStr = currentDay + "/" + (currentMonth  + 1) + "/" + currentYear;*/
+
+        //tvCurrent.setText(currentDateStr);
+
+
     }
+
 
     @Override
     public void onClick(View v) {
 
-        Calendar current = Calendar.getInstance();
-        int currentYear = current.get(Calendar.YEAR);
-        int currentMonth = current.get(Calendar.MONTH);
-        int currentDay = current.get(Calendar.DAY_OF_MONTH);
+        final Calendar currentDate = Calendar.getInstance();
+
+        int currentYear = currentDate.get(Calendar.YEAR);
+        int currentMonth= currentDate.get(Calendar.MONTH);
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+                String selectedDateStr = dayOfMonth + "/" + (month  + 1) + "/" + year;
+                tvCurrent.setText(selectedDateStr);
 
-                String endDate  = dayOfMonth + "/" + (month + 1) +"/" + year;
-                tvCurrent.setText(endDate);
+                Calendar selectedCal = Calendar.getInstance();
+                selectedCal.set(Calendar.YEAR,year);
+                selectedCal.set(Calendar.MONTH,month);
+                selectedCal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
 
+                tvTest.setText(String.valueOf(selectedCal.compareTo(currentDate)));
 
 
             }
         },currentYear,currentMonth,currentDay);
+
         datePickerDialog.show();
-
-
 
 
     }
